@@ -5,13 +5,11 @@ from keras.layers import *
 
 min_max_scaling = MinMaxScaler()
 training_data_df = pd.read_csv("malware_dataset.csv", index_col=0)
-
 training_data_df["classification"].replace({"malware": 1, "benign": 0}, inplace=True)
 
 # Take only 2000 first rows where we have 1000 malware and 1000 benign
 input_data = training_data_df.drop("classification", axis=1)
-val_data = training_data_df[['classification']].head(2000)
-input_data = input_data.head(2000)
+val_data = training_data_df[['classification']]
 
 # Proper data scaling based on entire date set (<-- check needed)
 input_data = min_max_scaling.fit_transform(input_data)
@@ -33,9 +31,11 @@ model.compile(loss='binary_crossentropy',
 model.fit(
     X,
     Y,
-    epochs=30,
+    epochs=20,
     shuffle=True,
-    verbose=2
+    verbose=2,
+    validation_split=0.01,
+    use_multiprocessing=True
 )
 
 test_error_rate = model.evaluate(X, Y, verbose=0)

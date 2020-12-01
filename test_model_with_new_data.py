@@ -8,7 +8,7 @@ min_max_scaling = MinMaxScaler()
 test_data = pd.read_csv("test_data.csv", index_col=0)
 
 # Get data from entire dataset in order to process scaling properly
-training_data_df = pd.read_csv("malware_dataset.csv", index_col=0).drop("classification", axis=1).head(2000)
+training_data_df = pd.read_csv("malware_dataset.csv", index_col=0).drop("classification", axis=1)
 
 # Add test data on the bottom of dataset
 input_data = training_data_df.append(test_data)
