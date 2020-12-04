@@ -19,8 +19,8 @@ Y = val_data
 
 # Define the model
 model = Sequential()
-model.add(Dense(23, input_dim=len(X[0]), activation='relu'))
-model.add(Dense(50, activation='relu'))
+model.add(Dense(50, input_dim=len(X[0]), activation='relu'))
+model.add(Dense(100, activation='relu'))
 model.add(Dense(50, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy',
