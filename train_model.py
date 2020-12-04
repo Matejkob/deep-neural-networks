@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers import *
 
 min_max_scaling = MinMaxScaler()
-training_data_df = pd.read_csv("malware_dataset.csv", index_col=0)
+training_data_df = pd.read_csv("malware_dataset.csv", index_col=0).head(20000)
 training_data_df["classification"].replace({"malware": 1, "benign": 0}, inplace=True)
 
 # Take only 2000 first rows where we have 1000 malware and 1000 benign
@@ -19,8 +19,8 @@ Y = val_data
 
 # Define the model
 model = Sequential()
-model.add(Dense(50, input_dim=len(X[0]), activation='relu'))
-model.add(Dense(100, activation='relu'))
+model.add(Dense(23, input_dim=len(X[0]), activation='relu'))
+model.add(Dense(50, activation='relu'))
 model.add(Dense(50, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy',
